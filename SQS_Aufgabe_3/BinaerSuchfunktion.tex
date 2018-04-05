@@ -1,0 +1,201 @@
+% Einstellen der Dokumentenklasse (möglich: book, report, article, dinbrief, beamer, scrbook, scrreprt, scrartcl)
+% Einstellen der Dokumentoptionen (möglich: 11pt, twocolumn, oneside, titlepage, landscape, a4paper)
+\documentclass[12pt,a4paper]{article}
+    
+% Sprach- und Kodierungseinstellungen
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+% Literaturverzeichnis
+\usepackage{cite}
+
+% Stil des Literaturverzeichnisses festlegen (möglich: plain, abbrv, alpha, unsrt, natbib)
+\bibliographystyle{plain}
+
+% Grafikpakete für Bilder und Vektorgraphiken
+\usepackage{graphicx}
+\usepackage{float}
+
+% Weitere Pakete
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Für Kopfzeile
+\usepackage{fancyhdr}
+
+% Für Tabellen
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+
+% Dokumentformatierung (möglich: plain, empty, headings, myheadings)
+\pagestyle{plain}
+
+% Seitenzahlenstil (möglich: arabic, roman, Roman, alph, Alph)
+\pagenumbering{arabic}
+
+% Hyperlink Package
+\usepackage{hyperref}
+
+% Für URLs
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-}
+
+% Farbe der Hyperlinks anpassen
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    citecolor={blue},
+    urlcolor={black}
+}
+
+% Fancy Pagestyle ändern
+\fancypagestyle{plain}{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+\title{	
+\textbf{Praktikum Aufgabe\\
+		Binäre Suchfunktion\\}
+	    Software Qualitätssicherung\\
+		SS2018\\
+		Hochschule Emden/Leer}
+\author{Yang Mao}
+\date{\today}
+
+% Fußzeile
+\fancyfoot{}		% Fußzeile leeren
+\lfoot{Software Qualitätssicherung}
+\rfoot{Praktikum Aufgabe}
+
+% Color for listing
+\usepackage{color}
+
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+% Listing
+
+\usepackage{listings}
+\lstset{language=Java,
+	showspaces=false,
+	showtabs=false,
+	numbers=left,
+	stepnumber=5,    
+	firstnumber=0,
+	numberfirstline=true
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	commentstyle=\color{pgreen},
+	keywordstyle=\color{pblue},
+	stringstyle=\color{pred},
+	basicstyle=\ttfamily,
+	moredelim=[il][\textcolor{pgrey}]{\$\$},
+	moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+
+%\makeindex
+              
+% Start der Inhaltsumgebung
+\begin{document}
+    % Titel anzeigen
+    \maketitle
+    \newpage
+    
+    \tableofcontents
+    \newpage
+	% Dokumentinformationen
+	
+\section{Testorakeln}
+	\begin{enumerate}
+		\item Objektfeld, ein geordnetes Feld (Array) von Objekten
+		\item Das Ergebnisobjekt hat 2 Attribute,
+		\\ $\rightarrow$ Index: die Stelle, wo das gesuchte in dem Feld gefunden wurde, -1 wenn das Gesuchte nicht	gefunden wurde.
+		\\ $\rightarrow$ Gefunden:  ein boolescher Wert true/false, je nach dem, ob das Gesuchte gefunden wurd.
+	\end{enumerate}
+\section{Äquivalenzklassen}
+
+\begin{table}[H]
+	\centering
+	\small
+	\setlength
+	\tabcolsep{2pt}
+	\begin{tabular}{l|l|l}
+		Eingabe & gültige Äquivalenzklassen & ungültige Äquivalenzklassen \\ \hline
+		Objektfeld & Array mit geordnetes Objekte & Array mit  unsortierte Objekte \\ [-3pt]
+		Schlüssel & ein Objekte & andere Eingaben \\ 
+		Leeres Ergebnis & ein Ergbnisobjekt mit 2 Felder, Index und Gefunden & andere Eingaben	
+	\end{tabular}
+		\caption{Äquivalenzklassen}
+\end{table}
+    	
+\section{Testdaten}
+   \begin{table}[H]
+   	\centering
+   	\begin{tabular}{l|l}
+   		Testfälle & 1 \\ \hline
+   		Objektfeld & [2, 3, 1] \\ \hline
+   		Schlüssel & 2 \\ \hline
+   		Leeres Ergebnis & {Index:null, Gefunden: null} \\ \hline
+   		Test Ergebnis & Abbruch 
+   	\end{tabular}
+   		\caption{Testdaten}
+   \end{table}
+    
+\section{Anhang}
+\begin{lstlisting}
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class BinaerSuchfunktion {
+public static void BinaerSuchfunktion(int key, int[] field, int low, int high, Result result){
+if (low == high) {
+if (field[low] == key) {
+result.found = true;
+result.index = low;
+}
+return;
+}
+int mid = (low + high) / 2;
+if (field[mid] == key){
+result.found = true;
+result.index = mid;
+}
+else if (field[mid] > key) {
+BinaerSuchfunktion(key, field, low, mid, result);
+}
+else if (field[mid] < key) {
+BinaerSuchfunktion(key, field, mid + 1, high, result);
+}
+}
+public static void main(String[] args){
+int[] field;
+Random random = new Random();
+int num = random.nextInt(20);
+ArrayList arrayList = new ArrayList<Integer>();
+Result result = new Result();
+
+
+for (int i = 0; i < num; i++ ){
+arrayList.add(random.nextInt(1000));
+}
+
+Collections.sort(arrayList);
+
+System.out.println(arrayList);
+field = arrayList.stream().mapToInt(i -> (int) i).toArray();
+
+int index = random.nextInt(num);
+System.out.printf("Richtige Index: %d, Gesuchte Zahl: %d", index + 1, field[index]);
+System.out.println();
+BinaerSuchfunktion(field[index], field, 0, num - 1, result);
+System.out.println(result);
+}
+}
+\end{lstlisting}
+\end{document}
