@@ -1,0 +1,240 @@
+% Einstellen der Dokumentenklasse (möglich: book, report, article, dinbrief, beamer, scrbook, scrreprt, scrartcl)
+% Einstellen der Dokumentoptionen (möglich: 11pt, twocolumn, oneside, titlepage, landscape, a4paper)
+\documentclass[12pt,a4paper]{article}
+    
+% Sprach- und Kodierungseinstellungen
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+% Literaturverzeichnis
+\usepackage{cite}
+
+% Stil des Literaturverzeichnisses festlegen (möglich: plain, abbrv, alpha, unsrt, natbib)
+\bibliographystyle{plain}
+
+% Grafikpakete für Bilder und Vektorgraphiken
+\usepackage{graphicx}
+\usepackage{float}
+
+% Weitere Pakete
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Für Kopfzeile
+\usepackage{fancyhdr}
+
+% Für Tabellen
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+
+% Dokumentformatierung (möglich: plain, empty, headings, myheadings)
+\pagestyle{plain}
+
+% Seitenzahlenstil (möglich: arabic, roman, Roman, alph, Alph)
+\pagenumbering{arabic}
+
+% Hyperlink Package
+\usepackage{hyperref}
+
+% Für URLs
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-}
+
+% Farbe der Hyperlinks anpassen
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    citecolor={blue},
+    urlcolor={black}
+}
+
+% Footnote in table
+\usepackage{tablefootnote}
+
+% Fancy Pagestyle ändern
+\fancypagestyle{plain}{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+\title{	
+\textbf{Praktikum Aufgabe\\
+		Äquivalenzklassen und Grenzwertanalyse\\}
+	    Software Qualitätssicherung\\
+		SS2018\\
+		Hochschule Emden/Leer}
+\author{Yang Mao}
+\date{\today}
+
+% Fußzeile
+\fancyfoot{}		% Fußzeile leeren
+\lfoot{Software Qualitätssicherung}
+\rfoot{Praktikum Aufgabe}
+
+% Color for listing
+\usepackage{color}
+
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+% Listing
+
+\usepackage{listings}
+\lstset{language=Java,
+	showspaces=false,
+	showtabs=false,
+	numbers=left,
+	stepnumber=5,    
+	firstnumber=0,
+	numberfirstline=true
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	commentstyle=\color{pgreen},
+	keywordstyle=\color{pblue},
+	stringstyle=\color{pred},
+	basicstyle=\ttfamily,
+	moredelim=[il][\textcolor{pgrey}]{\$\$},
+	moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+
+%\makeindex
+              
+% Start der Inhaltsumgebung
+\begin{document}
+    % Titel anzeigen
+    \maketitle
+    \newpage
+    
+    \tableofcontents
+    \newpage
+	% Dokumentinformationen
+	
+\section{Übung 1}
+\begin{table}[H]
+	\centering
+	\small
+	\setlength
+	\tabcolsep{2pt}
+	\begin{tabular}{l|l|l|l|l|l}
+		Lfd.Nr. & Eingabe & Gültige Äquivalenzklasse & Ungültige Äquivalenzklasse & Soll-Ergebnis& Repräsentant\\ \hline
+		1 & Alter & $18 < Alter \leq 65$ & 	$Alter \leq 18 \bigcup Alter >$ 65 & Richtig & 19\\
+		2 & Alter & $18 < Alter \leq 65$ & 	$Alter \leq 18 \bigcup Alter >$ 65 & Falsch & 18\\
+		3 & Alter & $18 < Alter \leq 65$ & 	$Alter \leq 18 \bigcup Alter >$ 65 & Richtig & 65\\
+		4 & Alter & $18 < Alter \leq 65$ & 	$Alter \leq 18 \bigcup Alter >$ 65 & Falsch &  64\\
+		5 & Alter & $18 < Alter \leq 65$ & 	$Alter \leq 18 \bigcup Alter >$ 65 & Richtig &  30\\
+	\end{tabular}
+		\caption{Äquivalenzklassen}
+\end{table}
+
+\section{Übung 2}
+\begin{table}[H]
+	\centering
+	\small
+	\setlength
+	\tabcolsep{2pt}
+	\begin{tabular}{l|l|l|l|l|l}
+		Lfd.Nr. & Eingabe & Gültige Äquivalenzklasse & Ungültige Äquivalenzklasse & Soll-Ergebnis& Repräsentant\\ \hline
+		1 & Tag & $1 < Tag \leq 31$ & 	$Tag <1 \bigcup Tag >$ 31 & Richtig & 1\\
+		2 & Tag & $1 < Tag \leq 31$ & 	$Tag <1 \bigcup Tag >$ 31 & Falsch & 0\\
+		3 & Tag & $1 < Tag \leq 31$ & 	$Tag <1 \bigcup Tag >$ 31 & Richtig & 31\\
+		4 & Tag & $1 < Tag \leq 31$ & 	$Tag <1 \bigcup Tag >$ 31 & Falsch & 32\\
+		5 & Tag & $1 < Tag \leq 31$ & 	$Tag <1 \bigcup Tag >$ 31 & Richtig & 30\\		
+\end{tabular}
+	\caption{Äquivalenzklassen}
+\end{table}
+
+\section{Übung 3}
+
+\begin{table}[H]
+	\centering
+	\small
+	\setlength
+	\tabcolsep{2pt}
+	\begin{tabular}{l|l|l|l|l|l}
+		Lfd.Nr. & Eingabe & Gültige Äquivalenzklasse & Ungültige Äquivalenzklasse & Soll-Ergebnis& Repräsentant\\ \hline
+		1 & Zahlungsweise & $Eingabe \subset a,b,c,d$ & $Eingabe \not\subset a,b,c,d$	  & Richtig & a\\
+		1 & Zahlungsweise & $Eingabe \subset a,b,c,d$ & $Eingabe \not\subset a,b,c,d$	  & Richtig & b\\
+		1 & Zahlungsweise & $Eingabe \subset a,b,c,d$ & $Eingabe \not\subset a,b,c,d$	  & Richtig & c\\
+		1 & Zahlungsweise & $Eingabe \subset a,b,c,d$ & $Eingabe \not\subset a,b,c,d$	  & Richtig & d\\
+		1 & Zahlungsweise & $Eingabe \subset a,b,c,d$ & $Eingabe \not\subset a,b,c,d$	  & Falsch & e\\
+	\end{tabular}
+	\caption{Äquivalenzklassen}
+	\begin{text}
+		\small
+		$a$= Jahrlich, $b$= Halbjährlich, $c$= Vierteljährlich, $d$= Monatlich, $e$= Taglich
+	\end{text}
+\end{table}
+
+
+\section{Übung 4}
+\begin{table}[H]
+	\centering
+	\small
+	\setlength
+	\tabcolsep{2pt}
+	\begin{tabular}{l|l|l|l|l|l}
+		Lfd.Nr. & Eingabe & Gültige Äquivalenzklasse & Ungültige Äquivalenzklasse & Soll-Ergebnis& Repräsentant\\ \hline
+		1 & $b$  & $Eingabe \subset a$ & $Eingabe \not\subset a$& Richtig & ``A1'' \\
+		2 & Zahl & $Eingabe \subset a$ & $Eingabe \not\subset a$ & Falsch & 100\\
+	\end{tabular}
+	\caption{Äquivalenzklassen}
+	\begin{text}
+		\small
+	$a$= Eingabe mit einen angefangen Buchstaben, $b$= Ein String mit einem Buchstaben Buchstaben
+	\end{text}
+\end{table}
+
+\section{Übung 5}
+\begin{table}[H]
+	\centering
+	\small
+	\setlength
+	\tabcolsep{2pt}
+	\begin{tabular}{l|l|l|l|l|l}
+		Lfd.Nr. & Eingabe & Gültige Äquivalenzklasse & Ungültige Äquivalenzklasse & Soll-Ergebnis& Repräsentant\\ \hline
+		1 & Wert & $1 \leq Wert \leq 99$ & 	$Tag < 1 \bigcup Tag >$ 99 & Richtig & 1\\
+		2 & Wert & $1 \leq Wert \leq 99$ & 	$Tag < 1 \bigcup Tag >$ 99 & Falsch &0\\
+		3 & Wert & $1 \leq Wert \leq 99$ & 	$Tag < 1 \bigcup Tag >$ 99 & Richtig & 99\\
+		4 & Wert & $1 \leq Wert \leq 99$ & 	$Tag < 1 \bigcup Tag >$ 99 & Falsch & 100\\
+	\end{tabular}
+	\caption{Äquivalenzklassen}
+\end{table}
+
+\section{Übung 6}
+\begin{table}[H]
+	\centering
+	\small
+	\setlength
+	\tabcolsep{2pt}
+	\begin{tabular}{l|l|l|l|l|l}
+		Lfd.Nr. & Eingabe & Gültige Äquivalenzklasse & Ungültige Äquivalenzklasse & Soll-Ergebnis& Repräsentant\\ \hline
+		1 & Holzart & 1.Eiche 2.Buch 3.Kiefer  & 4.Andere & Richtig & Holzart\\ 
+		2 & Länge & 5. $100 \leq$ Länge $\leq$ $500$ & 6. Länge $< 100 \bigcup$  Länge $> 500$ & Richtig& 100\\
+		3 & Anzahl & 7. $1 \leq$ Anzahl $\leq$ $9999$ &8.  Anzahl $< 1 \bigcup$  Länge $> 9999$ & Richtig& 100\\
+		4 & Auftragsnummer & 9. Erstes Zeichen ist H & 10. Erstes Zeichen ist nicht H& Richtig & H777
+	\end{tabular}
+	\caption{Äquivalenzklassen}
+\end{table}
+
+\section{Übung 7}
+\begin{table}[H]
+	\centering
+	\small
+	\setlength
+	\tabcolsep{2pt}
+	\begin{tabular}{l|l|l|l|l|l}
+		Lfd.Nr. & Eingabe & Gültige Äquivalenzklasse & Ungültige Äquivalenzklasse & Soll-Ergebnis& Repräsentant\\ \hline
+		1 & annualPercentageRate(apr) & [0..10] & andere & Richtig & 2\\
+		2 & loanValue & [0..500.000,00] & andere & Richtig & 100\\
+		3 & loanPeriod & [1..120] & andere & Richtig & 10\\
+	\end{tabular}
+	\caption{Äquivalenzklassen}
+\end{table}
+	1*1*1 = 1 gültiger Testfälle
+	2*2*2 - 1 = 7 ungültiger Testfälle
+
+\end{document}
